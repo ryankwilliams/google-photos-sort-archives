@@ -1,5 +1,8 @@
 import click
 
+from google_photos_sort_archives import utils
+from google_photos_sort_archives.sort_photos import SortPhotos
+
 
 @click.command()
 @click.option(
@@ -13,9 +16,9 @@ import click
     help="Destination folder to save sorted photos"
 )
 @click.option(
-    "-ym", "--year-month",
+    "--by-month",
     default=False,
-    help="Sort photos & videos by year/month",
+    help="Sort photos & videos by month",
     is_flag=True
 )
 @click.option(
@@ -30,6 +33,13 @@ import click
     help="Enable verbose logging",
     is_flag=True
 )
-def main(source, dest, year_month, clean, verbose):
+def main(source, dest, by_month, clean, verbose):
     """Sort Google Photos Archives"""
-    pass
+    # Setup logging
+    utils.initialize_logging(verbose)
+
+    # Instantiate SortPhotos object
+    sort_photos = SortPhotos(source, dest, by_month, clean)
+
+    # Sort photos
+    sort_photos.sort()
