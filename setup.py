@@ -20,6 +20,9 @@ setup(
             "google-photos-sort-archives=google_photos_sort_archives.cli:main"
         ]
     },
+    extras_require={
+        "release": ["bumpversion>=0.5.3"]
+    },
     classifiers=[
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Programming Language :: Python :: 3',
